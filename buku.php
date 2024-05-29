@@ -58,7 +58,7 @@
             </tbody>
         </table>
         <a href="./tambah-buku.php" class="btn btn-success w-5 mt-2">Tambah Data Buku</a>
-        <br>
+        <a href="./index.php" class="btn btn-secondary w-5 mt-2">Kembali ke Halaman Utama</a>
     </div>    
 </body>
 </html>

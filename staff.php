@@ -18,13 +18,31 @@
     </style>
 </head>
 <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Aplikasi Perpustakaan</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
+                        </li>
+                    </ul>
+                    <form action="logout_proccess.php" method="POST" class="d-flex">
+                        <button type="submit" class="btn btn-outline-danger btn-sm" name="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
     <div class="container">
         <h1 class="my-4">Daftar Staff</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <?php foreach($query as $staff) { ?>
                 <div class="col">
                     <div class="card">
-                        <img src="<?php echo $staff['foto']; ?>" class="card-img-top" alt="Foto Staff">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $staff['nama']; ?></h5>
                             <p class="card-text">No Telp: <?php echo $staff['telp']; ?></p>

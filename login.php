@@ -17,7 +17,7 @@
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <div class="card shadow-sm" style="max-width: 400px; width: 100%;">
         <div class="card-body">
-            <h1 class="card-title text-center mb-4">Login Admin</h1>
+            <h1 class="card-title text-center mb-4">LOGIN</h1>
             <form method="POST" action="./login_proccess.php">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>

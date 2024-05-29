@@ -1,69 +1,88 @@
 <?php
-    include_once("./connect.php");
+include_once("./connect.php");
 
-    if(isset($_POST["submit"])) {
-        $nama = $_POST["nama"];
-        $telp = $_POST["telp"];
-        $email = $_POST["email"];
+if(isset($_POST["submit"])) {
+    $nama = $_POST["nama"];
+    $telp = $_POST["telp"];
+    $email = $_POST["email"];
 
-        $query = mysqli_query($db, "INSERT INTO staff VALUES (
-            NULL, '$nama', '$telp', '$email'
-        ) ");
+    // Use prepared statements to prevent SQL injection and handle special characters
+    $stmt = $db->prepare("INSERT INTO staff (nama, telp, email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $nama, $telp, $email);
+
+    if ($stmt->execute()) {
+        echo "Data successfully inserted!";
+    } else {
+        echo "Error: " . $stmt->error;
     }
-?>
 
+    $stmt->close();
+    $db->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORM TAMBAH STAFF</title>
+    <title>Form Tambah Staff</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: #f0f2f5;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 30px;
-        }
-        .form-label {
-            font-weight: bold;
-        }
-        .btn-submit {
-            background-color: #007bff;
-            border: none;
-        }
-        .btn-submit:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
-    <div class="container w-50">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Aplikasi Perpustakaan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
+                    </li>
+                </ul>
+                <form action="logout_proccess.php" method="POST" class="d-flex">
+                    <button type="submit" class="btn btn-outline-danger btn-sm" name="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 w-50">
         <h1 class="mb-4">Form Tambah Data Staff</h1>
-        <form action="" method="POST">
+        <form action="" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama" name="nama">
+                <input type="text" id="nama" name="nama" class="form-control" required>
+                <div class="invalid-feedback">
+                    Silakan masukkan nama.
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="telp" class="form-label">No Telp</label>
-                <input type="text" class="form-control" id="telp" name="telp">
+                <input type="text" id="telp" name="telp" class="form-control" required>
+                <div class="invalid-feedback">
+                    Silakan masukkan nomor telepon.
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" id="email" name="email" class="form-control" required>
+                <div class="invalid-feedback">
+                    Silakan masukkan email yang valid.
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-submit" name="submit">SUBMIT</button>
+            <button type="submit" name="submit" class="btn btn-primary">SUBMIT</button>
+            <br>
+            <div class="text-left mt-3">
+                <a href="./staff.php" class="text-decoration-none">Kembali ke Menu Daftar Staff</a>
+            </div>
         </form>
-        <a href="./index.php">Kembali ke Halaman Utama</a>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+6hh0+t/t3S4L+GmK3s63tCkEZe5D" crossorigin="anonymous"></script>
 </body>
 </html>

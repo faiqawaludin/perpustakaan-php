@@ -61,6 +61,9 @@
 
                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </form>
+            <div class="text-left mt-3">
+                <a href="./buku.php" class="text-decoration-none">Kembali ke Menu Daftar Buku</a>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-7RXgkmEzQ+Wq0xJSJ3jIX6gwJ2OCEob8lzyd/vKO3cQZPtnAohjGJ9+BNO2yup7f" crossorigin="anonymous"></script>
 </body>
